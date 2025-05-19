@@ -2,8 +2,8 @@
 
 ## Project Setup
 * Create virtual env
-  ```bash
-$ python3 -m venv env_name
+```bash
+  $ python3 -m venv env_name
 ```
   
 * Activate the virtual env
