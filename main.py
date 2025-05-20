@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from routes.users import users
 from routes.auth import register, login
 from database.db import Base, engine  # assumes async engine
 from sqlalchemy.ext.asyncio import AsyncEngine
@@ -30,4 +31,5 @@ async def startup():
 # Include your route files
 app.include_router(register.router)
 app.include_router(login.router)
+app.include_router(users.router)
 

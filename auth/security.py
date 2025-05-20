@@ -85,3 +85,15 @@ def verify_token(token: str) -> TokenData:
             detail=f"Invalid token: {str(e)}",
             headers={"WWW-Authenticate": "Bearer"},
         )
+        
+def create_email_token(email: str):
+    expire = datetime.utcnow() + timedelta(minutes=5)
+    to_encode = {"email": email, "exp": expire}
+    return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+
+def verify_email_token(token: str):
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        return payload.get("email")
+    except:
+        return None
