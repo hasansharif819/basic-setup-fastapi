@@ -16,5 +16,15 @@ async def login_user(data: LoginRequest, db: AsyncSession):
             detail="Invalid email or password"
         )
 
-    token = create_access_token(data={"sub": user.email, "id": user.id, "role": user.role})
-    return {"access_token": token, "token_type": "bearer"}
+    token = create_access_token(data={"email": user.email, "id": user.id, "role": user.role})
+    response_user = {
+        "id": user.id,
+        "name": user.name,
+        "email": user.email,
+        "role": user.role,
+    }
+    return {
+        "access_token": token, 
+        "token_type": "bearer",
+        "user": response_user
+        }
